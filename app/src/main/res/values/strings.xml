@@ -5,4 +5,13 @@
     <string name="profile">Profile</string>
     <string name="favourite_movies">Favourite Movies</string>
     <string name="no_favourite_movies_yet">No favourite movies yet.</string>
+    <string name="rating">Rating:</string>
+    <string name="release_date">Release Date:</string>
+    <string name="overview">Overview:</string>
+    <string name="search_movies">Search Movies</string>
+    <string name="show_all">Show All</string>
+    <string name="slider1">Slide image 1</string>
+    <string name="slider2">Slide image 2</string>
+    <string name="slider3">Slide image 3</string>
+
 </resources>

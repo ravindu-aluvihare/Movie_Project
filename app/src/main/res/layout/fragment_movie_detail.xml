@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#0F4D0F"
+    android:background="@drawable/background"
     android:padding="16dp">
 
     <LinearLayout
@@ -33,7 +33,8 @@
             android:id="@+id/text_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textSize="30sp"
+            android:textColor="@color/Gold"
             android:lineSpacingMultiplier="1.2"
             android:textStyle="bold" />
 
@@ -41,23 +42,27 @@
             android:id="@+id/text_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Release Date: "
+            android:text="@string/release_date"
+            android:textSize="20sp"
             android:fontFamily="Bold"
-            android:textColor="@color/white" />
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="@color/Sage_Green"/>
 
         <TextView
             android:id="@+id/text_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating: "
+            android:text="@string/rating"
             android:fontFamily="Bold"
-            android:textColor="@color/white" />
+            android:textSize="20sp"
+            android:textColor="@color/Sage_Green" />
 
         <TextView
             android:id="@+id/text_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Overview: "
+            android:text="@string/overview"
+            android:textSize="15sp"
             android:textColor="@color/white" />
     </LinearLayout>
 </ScrollView>

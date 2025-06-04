@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ViewFlipper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,9 +23,7 @@ class MovieListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var movieAdapter: MovieAdapter
-
     private var allMovies: List<Movie> = emptyList()
-
     private var selectedGenreButton: View? = null
 
     private val viewModel by lazy {
@@ -33,7 +32,6 @@ class MovieListFragment : Fragment() {
         ViewModelProvider(this, factory)[MovieListViewModel::class.java]
     }
 
-    // Map genres to their IDs (replace these with your actual genre IDs)
     private val genreNameToId = mapOf(
         "Adventure" to 12,
         "Action" to 28,
@@ -55,6 +53,10 @@ class MovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Start auto flipping
+        binding.viewFlipper.startFlipping()
+
+        // Genre filter buttons
         val genreButtons = listOf(
             binding.buttonShowAll to null,
             binding.button0 to "Adventure",
@@ -68,14 +70,10 @@ class MovieListFragment : Fragment() {
 
         genreButtons.forEach { (button, genreName) ->
             button.setOnClickListener {
-                // Deselect previous button
                 selectedGenreButton?.isSelected = false
-
-                // Select current button
                 button.isSelected = true
                 selectedGenreButton = button
 
-                // Apply filter
                 if (genreName == null) {
                     movieAdapter.submitList(allMovies)
                 } else {
@@ -84,14 +82,18 @@ class MovieListFragment : Fragment() {
             }
         }
 
-
+        // Set up adapter and non-scrollable RecyclerView inside ScrollView
         movieAdapter = MovieAdapter { movie ->
             navigateToMovieDetail(movie)
         }
 
-        binding.recyclerViewMovies.layoutManager = LinearLayoutManager(context)
-        binding.recyclerViewMovies.adapter = movieAdapter
+        binding.recyclerViewMovies.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = movieAdapter
+            isNestedScrollingEnabled = false
+        }
 
+        // Observe all movies and search results
         viewModel.movies.observe(viewLifecycleOwner) { movies ->
             allMovies = movies
             movieAdapter.submitList(movies)
@@ -101,8 +103,7 @@ class MovieListFragment : Fragment() {
             movieAdapter.submitList(searchResults)
         }
 
-
-        // Listen for search input changes
+        // Search input
         binding.editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -110,20 +111,19 @@ class MovieListFragment : Fragment() {
                 if (query.isNotBlank()) {
                     viewModel.searchMovies(query)
                 } else {
-                    movieAdapter.submitList(allMovies) // show all movies if query is empty
+                    movieAdapter.submitList(allMovies)
                     selectedGenreButton?.isSelected = false
                     binding.buttonShowAll.isSelected = true
                     selectedGenreButton = binding.buttonShowAll
                 }
             }
+
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        // Set Show All button selected on startup
+        // Default button selected
         binding.buttonShowAll.isSelected = true
         selectedGenreButton = binding.buttonShowAll
-
-
     }
 
     private fun navigateToMovieDetail(movie: Movie) {
@@ -134,27 +134,15 @@ class MovieListFragment : Fragment() {
     private fun filterMovies(genreName: String) {
         val genreId = genreNameToId[genreName]
         if (genreId == null) {
-            // If genre not found, show all movies
             movieAdapter.submitList(allMovies)
             return
         }
+
         val filteredList = allMovies.filter { movie ->
             movie.genreIds.contains(genreId)
         }
         movieAdapter.submitList(filteredList)
     }
-
-    private fun filterBySearchQuery(query: String) {
-        val filteredList = if (query.isEmpty()) {
-            allMovies
-        } else {
-            allMovies.filter { movie ->
-                movie.title.contains(query, ignoreCase = true)
-            }
-        }
-        movieAdapter.submitList(filteredList)
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

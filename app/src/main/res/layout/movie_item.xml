@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#0F4D0F"
+    android:background="#0818A8"
     android:orientation="horizontal"
     android:padding="8dp">
 
@@ -19,7 +19,7 @@
             android:id="@+id/image_poster_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#0F4D0F"
+            android:background="#0818A8"
             android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
@@ -28,7 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#0F4D0F"
+        android:background="#0818A8"
         android:orientation="vertical"
         android:padding="8dp">
 
@@ -36,7 +36,8 @@
             android:id="@+id/text_title_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <TextView
@@ -44,13 +45,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Release Date: "
-            android:textColor="@color/white" />
+            android:textSize="15sp"
+            android:textColor="@color/Sage_Green" />
 
         <TextView
             android:id="@+id/text_rating_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rating: "
-            android:textColor="@color/white" />
+            android:textColor="@color/Sage_Green"/>
+
     </LinearLayout>
 </LinearLayout>
