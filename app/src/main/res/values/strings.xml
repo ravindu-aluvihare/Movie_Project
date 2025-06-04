@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Movi_app</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
+    <string name="profile">Profile</string>
+    <string name="favourite_movies">Favourite Movies</string>
+    <string name="no_favourite_movies_yet">No favourite movies yet.</string>
+</resources>

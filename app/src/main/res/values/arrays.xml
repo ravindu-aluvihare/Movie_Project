@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="movie_categories">
+        <item>Popular</item>
+        <item>Upcoming</item>
+    </string-array>
+    <string-array name="movie_genres">
+        <item>Adventure</item>
+        <item>Action</item>
+        <item>Comedy</item>
+        <item>Drama</item>
+        <item>Crime</item>
+        <item>Documentary</item>
+        <item>History</item>
+        <item>Romance</item>
+    </string-array>
+</resources>
