@@ -1,4 +1,8 @@
 
+
+https://github.com/user-attachments/assets/c97eee35-00ee-4989-b354-a0c21ce511d8
+
+
 ## Feature Overview
 - Displays a list of popular movies fetched from the TMDB API.
 - Includes filter buttons (e.g., "Adventure", "Action") for genre-based browsing.
