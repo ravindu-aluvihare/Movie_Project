@@ -1,5 +1,4 @@
 
-
 ## Feature Overview
 - Displays a list of popular movies fetched from the TMDB API.
 - Includes filter buttons (e.g., "Adventure", "Action") for genre-based browsing.
